@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>骑迹计划 V2</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">骑</span><div><h1>骑迹计划 <small>V2</small></h1><p>长途骑行补给感知与 AI 分日规划</p></div></div>
+      <div class="top-actions"><button class="ghost-button" id="resetButton">重置</button><button class="primary-button" id="saveButton">保存行程</button></div>
+    </header>
+
+    <main class="workspace">
+      <aside class="panel planner-panel" aria-label="路线规划设置">
+        <section class="panel-section">
+          <div class="section-heading"><h2>规划条件</h2><span class="status-dot" id="planStatus">可生成</span></div>
+          <label>起点<input id="startInput" value="成都"></label>
+          <label>终点<input id="endInput" value="乐山"></label>
+          <div class="two-col"><label>计划天数<input id="daysInput" type="number" min="2" max="6" value="3"></label><label>总里程<input id="distanceInput" type="number" min="120" max="520" value="246"></label></div>
+        </section>
+        <section class="panel-section"><h2>骑行强度</h2><div class="segmented" role="radiogroup"><button class="segment" data-intensity="easy">轻松</button><button class="segment active" data-intensity="standard">标准</button><button class="segment" data-intensity="challenge">挑战</button></div><p class="helper-text" id="intensityHelp">标准：每日约 70-100km，适合有一定骑行基础的用户。</p></section>
+        <section class="panel-section"><h2>路线偏好</h2><div class="preference-list"><label><input type="checkbox" checked> 住宿优先</label><label><input type="checkbox" checked> 补给优先</label><label><input type="checkbox" checked> 安全优先</label><label><input type="checkbox"> 少爬升</label></div></section>
+        <button class="generate-button" id="generateButton">生成 AI 骑行方案</button>
+        <section class="panel-section result-summary"><h2>规划结果</h2><dl><div><dt>日均里程</dt><dd id="avgDistance">82km</dd></div><div><dt>补给空窗</dt><dd id="gapCount">2 段</dd></div><div><dt>综合风险</dt><dd id="riskLevel">中</dd></div></dl></section>
+        <section class="panel-section"><h2>途中状态</h2><p class="helper-text">发生变化时，让 AI 重新评估后续行程。</p><div class="ride-status-actions"><button data-adjust="fatigue">体力下降</button><button data-adjust="weather">天气变化</button><button data-adjust="time">时间不足</button><button data-adjust="progress">进度滞后</button></div></section>
+      </aside>
+
+      <section class="map-stage" aria-label="路线地图预览">
+        <div class="map-toolbar"><div><h2 id="routeTitle">成都 → 乐山 · 3 日</h2><p id="routeSubtitle">246km · AI 已按补给与住宿条件拆分</p></div><div class="layer-toggles"><button class="layer active" data-layer="food">餐饮</button><button class="layer active" data-layer="store">便利店</button><button class="layer active" data-layer="hotel">住宿</button><button class="layer active" data-layer="town">城镇</button><button class="layer active" data-layer="repair">维修</button></div></div>
+        <div class="map-canvas">
+          <svg viewBox="0 0 900 560" aria-label="模拟骑行路线地图"><path class="terrain" d="M35 105 C160 45 235 118 350 72 S560 60 670 110 S800 118 870 72"/><path class="terrain" d="M25 430 C180 365 275 485 410 420 S585 370 715 430 S810 480 875 420"/><path class="route-base" d="M90 450 C140 378 172 322 250 292 S372 268 438 214 S552 112 650 142 S750 258 815 105"/><path class="route-risk" d="M470 188 C535 132 590 124 650 142"/><path class="route-focus" id="routeFocus" d="M250 292 C372 268 438 214 650 142"/></svg>
+          <span class="map-label" style="left:8%;top:78%">成都</span><span class="map-label" style="left:27%;top:51%">眉山</span><span class="map-label" style="left:53%;top:30%">夹江</span><span class="map-label" style="left:82%;top:17%">乐山</span>
+          <button class="poi food" data-marker="food" style="left:21%;top:61%">餐</button><button class="poi store" data-marker="store" style="left:34%;top:48%">便</button><button class="poi hotel" data-marker="hotel" style="left:29%;top:55%">住</button><button class="poi town" data-marker="town" style="left:51%;top:37%">镇</button><button class="poi repair" data-marker="repair" style="left:68%;top:35%">修</button><button class="poi food" data-marker="food" style="left:76%;top:27%">餐</button>
+          <div class="risk-callout"><strong>补给空窗 31km</strong><span>Day 2 第 43-74km，建议提前补水并白天通过。</span></div>
+        </div>
+        <footer class="map-footer"><span><i class="legend route"></i>推荐路线</span><span><i class="legend gap"></i>补给空窗</span><span><i class="legend supply"></i>沿途补给</span><small>部分营业信息待确认 · 示例数据</small></footer>
+      </section>
+
+      <aside class="panel detail-panel" aria-label="每日行程详情">
+        <section class="panel-section"><div class="section-heading"><h2>每日行程</h2><button class="text-button" id="adjustButton">调整终点</button></div><div class="day-cards" id="dayCards"></div></section>
+        <section class="panel-section ai-reason-card"><span class="eyebrow">AI 推荐解释</span><h2 id="reasonTitle">为什么推荐夹江？</h2><p id="recommendationReason">住宿和餐饮较可靠，可衔接次日路线；后半程有 31km 补给空窗。</p></section>
+        <section class="panel-section"><h2>补给与安全提醒</h2><div class="warning-list" id="warningList"></div></section>
+      </aside>
+    </main>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <aside class="adjustment-drawer" id="adjustmentDrawer" aria-labelledby="adjustmentTitle" hidden>
+    <button class="drawer-close" id="drawerClose" aria-label="关闭">×</button><span class="eyebrow">AI 动态调整</span><h2 id="adjustmentTitle">调整后续行程</h2><p id="adjustmentContext">当前变化：体力下降</p>
+    <label>当前完成距离<input id="progressInput" type="number" value="46" min="0"> km</label>
+    <label>疲劳程度<select id="fatigueInput"><option value="low">较低</option><option value="medium">一般</option><option value="high" selected>较高</option></select></label>
+    <button class="generate-button" id="createAdjustment">生成调整建议</button>
+    <section class="adjustment-preview" id="adjustmentPreview" hidden aria-live="polite"></section>
+    <div class="drawer-actions"><button class="primary-button" id="confirmAdjustment" disabled>确认重新规划</button><button class="ghost-button" id="cancelAdjustment">取消</button></div>
+  </aside>
+  <div class="toast" id="toast" aria-live="polite">当前骑行方案已保存</div>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
