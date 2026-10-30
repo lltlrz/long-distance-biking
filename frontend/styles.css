@@ -762,3 +762,5 @@ button {
     width: 210px;
   }
 }
+
+.agent-panel { margin: 20px; background: white; border-radius: 18px; } .agent-panel pre, #warningList { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 400px; overflow: auto; } .agent-panel label { display: inline-grid; margin: 8px; } .agent-panel button { margin: 5px; padding: 8px; } .day-card { white-space: pre-line; }

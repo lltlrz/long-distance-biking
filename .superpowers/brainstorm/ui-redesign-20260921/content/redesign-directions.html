@@ -1,0 +1,42 @@
+<h2>选择模型改版方向</h2>
+<p class="subtitle">三种方案都保留原模型，另存为新版；区别在于对 AI Agent、动态调整和骑行中状态的表达深度。</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#f3f7f4">
+      <div style="display:grid;grid-template-columns:26% 46% 28%;height:240px;gap:8px">
+        <div style="background:#fff;border:1px solid #dce6df;border-radius:10px;padding:10px">
+          <b style="color:#245b47">规划条件</b><div class="placeholder" style="height:24px;margin-top:12px"></div><div class="placeholder" style="height:24px"></div><button class="mock-button">生成计划</button>
+        </div>
+        <div style="background:#dfece6;border-radius:10px;position:relative"><div style="position:absolute;left:15%;top:65%;width:68%;height:4px;background:#2c775b;transform:rotate(-18deg)"></div><span style="position:absolute;left:50%;top:32%;background:#fff0e8;color:#a94822;padding:5px;border-radius:6px">31km 补给空窗</span></div>
+        <div style="background:#fff;border:1px solid #dce6df;border-radius:10px;padding:10px"><b>每日行程</b><div class="placeholder" style="height:54px;margin-top:10px"></div><div class="placeholder" style="height:54px"></div><div class="placeholder" style="height:54px"></div></div>
+      </div>
+    </div>
+    <div class="card-body"><h3>A · 渐进增强</h3><p>保留当前三栏结构，补齐 AI 推荐理由、动态调整入口、疲劳/天气/时间输入和重新规划结果。修改稳健、与现有 Demo 连续性最好。</p></div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#f4f6f8">
+      <div style="height:240px;background:#fff;border-radius:10px;display:grid;grid-template-rows:42px 1fr;overflow:hidden;border:1px solid #d9e0e5">
+        <div style="background:#173f34;color:white;padding:11px 16px"><b>骑迹 AI 规划助手</b></div>
+        <div style="display:grid;grid-template-columns:34% 66%"><div style="padding:12px;border-right:1px solid #e5e8ea"><div style="background:#edf7f1;padding:10px;border-radius:8px">我会按你的体力和沿途补给拆分行程</div><div class="placeholder" style="height:30px;margin-top:12px"></div><div class="placeholder" style="height:30px"></div><button class="mock-button">让 AI 规划</button></div><div style="background:#dfe9e4;position:relative"><span style="position:absolute;right:12px;top:14px;background:white;padding:8px;border-radius:8px">AI 解释卡</span></div></div>
+      </div>
+    </div>
+    <div class="card-body"><h3>B · AI 对话主导</h3><p>把 Agent 对话放在核心位置，地图成为结果画布。AI 感更强，但会显著改变原有信息架构，补给判断的浏览效率略低。</p></div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#eef3f2">
+      <div style="height:240px;background:#dfe9e4;border-radius:10px;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:12px 12px auto 12px;background:#fff;padding:10px;border-radius:10px"><b>成都 → 乐山</b>　Day 2 / 3　<span style="color:#c15c27">前方补给稀疏</span></div>
+        <div style="position:absolute;left:12px;right:12px;bottom:12px;background:white;padding:12px;border-radius:10px"><b>骑行中决策</b><div style="display:flex;gap:6px;margin-top:8px"><button class="mock-button">我有点累</button><button class="mock-button">天气变差</button><button class="mock-button">时间不够</button></div></div>
+      </div>
+    </div>
+    <div class="card-body"><h3>C · 双模式产品</h3><p>区分“出发前规划”和“骑行中调整”，完整覆盖动态路线调整。故事最完整，但页面和交互数量最多，实施与展示成本最高。</p></div>
+  </div>
+</div>
+
+<div class="pros-cons">
+  <div class="pros"><h4>我的建议：A</h4><ul><li>最符合现有作品集基础</li><li>能覆盖新文档的关键增量</li><li>低保真、Figma 与 Demo 易保持一致</li></ul></div>
+  <div class="cons"><h4>后续可演进</h4><ul><li>将 C 的骑行中调整作为独立状态页加入</li><li>避免首版同时重做导航与交互范式</li></ul></div>
+</div>

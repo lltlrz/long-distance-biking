@@ -1,0 +1,35 @@
+<h2>骑迹计划 V2 · 页面与状态结构</h2>
+<p class="subtitle">保留一个主工作台，通过抽屉与状态卡完成解释和调整，避免把用户带离地图。</p>
+
+<div class="mockup">
+  <div class="mockup-header">主工作台：规划结果状态</div>
+  <div class="mockup-body" style="display:grid;grid-template-columns:25% 48% 27%;height:430px;gap:10px;background:#edf3ef;padding:12px">
+    <div style="background:white;border-radius:12px;padding:12px;overflow:hidden">
+      <div class="label">01 规划输入</div><h3 style="margin:5px 0">成都 → 乐山</h3>
+      <div class="placeholder" style="height:30px"></div><div class="placeholder" style="height:30px"></div>
+      <div style="display:flex;gap:5px;margin:10px 0"><span style="padding:5px;background:#dcefe5;border-radius:6px">标准强度</span><span style="padding:5px;background:#dcefe5;border-radius:6px">补给优先</span></div>
+      <button class="mock-button" style="width:100%">生成 AI 骑行方案</button>
+      <hr style="border:0;border-top:1px solid #e5ebe7;margin:16px 0">
+      <div class="label">途中状态</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px"><button class="mock-button">体力下降</button><button class="mock-button">天气变化</button><button class="mock-button">时间不足</button><button class="mock-button">进度滞后</button></div>
+    </div>
+    <div style="background:#dce8e2;border-radius:12px;position:relative;overflow:hidden">
+      <div style="position:absolute;left:10%;top:68%;width:75%;height:5px;background:#22765a;transform:rotate(-22deg);border-radius:6px"></div>
+      <div style="position:absolute;left:47%;top:36%;width:23%;height:5px;background:#d7593f;transform:rotate(-22deg);border-radius:6px"></div>
+      <span style="position:absolute;left:48%;top:23%;background:#fff2ea;color:#a9432c;padding:7px;border-radius:8px"><b>补给空窗 31km</b></span>
+      <span style="position:absolute;left:12%;bottom:12px;background:white;padding:8px;border-radius:8px">图层：餐饮　便利店　住宿　维修</span>
+    </div>
+    <div style="background:white;border-radius:12px;padding:12px;overflow:hidden">
+      <div class="label">02 决策解释</div><h3 style="margin:5px 0">每日行程</h3>
+      <div style="border:1px solid #dbe6df;border-radius:9px;padding:9px;margin-top:8px"><b>Day 1 · 成都 → 眉山</b><p style="margin:4px 0">78km · 爬升 420m</p><small>住宿与餐饮密度高，适合首日适应。</small></div>
+      <div style="border:2px solid #2c775b;border-radius:9px;padding:9px;margin-top:8px"><b>Day 2 · 眉山 → 夹江</b><p style="margin:4px 0">88km · 爬升 540m</p><small>后半程 31km 补给稀疏，建议提前补水。</small></div>
+      <div style="background:#fff7e7;border-radius:9px;padding:9px;margin-top:8px"><b>AI 为什么这样安排？</b><p style="margin:4px 0;font-size:13px">兼顾日均里程、住宿可靠性与次日衔接。</p></div>
+      <button class="mock-button" style="width:100%;margin-top:10px">调整 Day 2</button>
+    </div>
+  </div>
+</div>
+
+<div class="split" style="margin-top:18px">
+  <div class="mockup"><div class="mockup-header">调整抽屉：提交状态</div><div class="mockup-body"><h3>今天骑得有点累</h3><p>当前完成 46km · 疲劳程度：较高</p><div class="placeholder" style="height:38px"></div><button class="mock-button">生成调整建议</button></div></div>
+  <div class="mockup"><div class="mockup-header">影响预览：确认后应用</div><div class="mockup-body"><h3>建议提前在丹棱停留</h3><p>Day 2：88km → 76km</p><p>Day 3：80km → 92km</p><p style="color:#287357">补给空窗减少 1 段</p><button class="mock-button">确认重新规划</button></div></div>
+</div>

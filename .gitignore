@@ -38,3 +38,10 @@ venv/
 .Rhistory
 .RData
 .Rproj.user/
+
+.env
+.venv/
+.vendor/
+__pycache__/
+.pytest_cache/
+05-resume-and-interview.md
